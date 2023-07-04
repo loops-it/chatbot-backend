@@ -529,17 +529,17 @@ router.post("/translate-to-english-api",async(req, res)=>{
                 );
                 
                 const model = new OpenAI({
-                  temperature: 0,
-                  modelName: 'gpt-3.5-turbo',
+                  temperature: 0.6,
+                  modelName: 'gpt-3.5-turbo-16k',
                 });
               
                   const chain = VectorDBQAChain.fromLLM(model, vectorStore, {
     foo: "bar",
-    k: 10,
+    k: 2,
     returnSourceDocuments: true,
   });
                   const question = translationsToEng.toString();
-        		  query = `answer to ${question} as a assistant, if you do not know the answer just say "Hmm.. I'm not sure."`
+        		  query = `friendly reply to ${question}, if you could not find answer just say "Hmm.. I'm not sure."`
                   const response = await chain.call({ query });
                   api_response = response.text;
                  
