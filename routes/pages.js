@@ -1356,13 +1356,13 @@ router.post("/financial-advisor-api",async(req, res)=>{
                 );
                 
                 const model = new OpenAI({
-                  temperature: 0,
-                  modelName: 'gpt-3.5-turbo',
+                  temperature: 0.6,
+                  modelName: 'gpt-3.5-turbo-16k',
                 });
                
                   const chain = VectorDBQAChain.fromLLM(model, vectorStore, {
     foo: "bar",
-    k: 10,
+    k: 2,
     returnSourceDocuments: true,
   });
                   const question = translationsToEng.toString();
